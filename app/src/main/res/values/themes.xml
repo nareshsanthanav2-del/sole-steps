@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Sole" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="android:windowBackground">@color/oled_black</item>
+        <item name="android:statusBarColor">@color/oled_black</item>
+        <item name="android:navigationBarColor">@color/oled_black</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/oled_black</item>
+        <item name="colorSurface">@color/surface_dark</item>
+        <item name="colorOnSurface">@color/white</item>
+        <item name="bottomSheetDialogTheme">@style/Theme.Sole.BottomSheet</item>
+    </style>
+
+    <style name="Theme.Sole.BottomSheet" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.Sole.BottomSheet</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
+    <style name="Widget.Sole.BottomSheet" parent="Widget.Material3.BottomSheet">
+        <item name="backgroundTint">@color/surface_dark</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Sole.TopRounded</item>
+    </style>
+
+    <style name="ShapeAppearance.Sole.TopRounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">28dp</item>
+        <item name="cornerSizeTopRight">28dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+</resources>
