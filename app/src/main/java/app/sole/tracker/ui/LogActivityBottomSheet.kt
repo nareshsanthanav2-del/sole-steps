@@ -1,6 +1,5 @@
 package app.sole.tracker.ui
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +13,7 @@ import app.sole.tracker.data.PrefsManager
 import app.sole.tracker.data.StepDatabaseHelper
 import app.sole.tracker.databinding.BottomSheetLogActivityBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.text.NumberFormat
 import java.time.LocalDate
 import java.util.Locale
@@ -101,21 +101,24 @@ class LogActivityBottomSheet(
                             String.format(Locale.US, "%.1f km", est.distanceKm)
                         }
 
-                        AlertDialog.Builder(requireContext())
-                            .setTitle("Add to today?")
-                            .setMessage(
-                                "Based on "$activityName" ($finalMinutes min), add these metrics to your day?
+                        val summaryMessage = buildString {
+                            append("Based on \"")
+                            append(activityName)
+                            append("\" (")
+                            append(finalMinutes)
+                            append(" min), add these metrics to your day?\n\n")
+                            append("• +${fmt.format(est.steps)} steps\n")
+                            append("• +$distText\n")
+                            append("• +${fmt.format(est.kcal)} Kcal\n")
+                            append("• +${est.activeMinutes} min active")
+                        }
 
-" +
-                                    "• +${fmt.format(est.steps)} steps
-" +
-                                    "• +$distText
-" +
-                                    "• +${fmt.format(est.kcal)} Kcal
-" +
-                                    "• +${est.activeMinutes} min active"
-                            )
-                            .setNegativeButton("Cancel", null)
+                        MaterialAlertDialogBuilder(requireContext())
+                            .setTitle("Add to today?")
+                            .setMessage(summaryMessage)
+                            .setNegativeButton("Cancel") { dialog, _ ->
+                                dialog.dismiss()
+                            }
                             .setPositiveButton("Add to Today") { _, _ ->
                                 val db = StepDatabaseHelper(requireContext())
                                 db.addActivityMetrics(
