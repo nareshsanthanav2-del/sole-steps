@@ -5,28 +5,29 @@
     android:viewportWidth="108"
     android:viewportHeight="108">
 
-    <!-- Dark inactive ring track -->
+    <!-- Dark gray circular track -->
     <path
         android:fillColor="#00000000"
-        android:pathData="M54,26 A28,28 0 1,1 53.99,26"
+        android:pathData="M54,24.48 A29.52,29.52 0 1,1 53.99,24.48"
         android:strokeColor="#1C1C1E"
-        android:strokeWidth="6.5" />
+        android:strokeWidth="8.4" />
 
-    <!-- White active 75% progress arc from 12 o'clock clockwise to 9 o'clock -->
+    <!-- White 75% progress arc with rounded ends -->
     <path
         android:fillColor="#00000000"
-        android:pathData="M54,26 A28,28 0 1,1 26,54"
+        android:pathData="M54,24.48 A29.52,29.52 0 1,1 24.48,54"
         android:strokeColor="#FFFFFF"
         android:strokeLineCap="round"
-        android:strokeWidth="6.5" />
+        android:strokeWidth="8.4" />
 
-    <!-- Minimalist tilted running shoe upper -->
+    <!-- Running shoe upper -->
     <path
         android:fillColor="#FFFFFF"
-        android:pathData="M43.5,51.2 L48.2,44.2 C49.3,42.6 51.4,42.3 52.8,43.6 L54.6,45.2 C55.4,45.9 56.6,45.8 57.3,45.0 L58.0,44.2 C58.9,43.2 60.5,43.4 61.1,44.6 L62.9,48.5 C63.6,50.0 64.6,51.3 66.0,52.2 L69.8,54.7 C71.6,55.9 72.1,58.3 70.9,60.1 L69.4,62.3 L43.5,51.2 Z" />
+        android:pathData="M47.41,38.98 L46.82,39.55 L41.54,46.62 L40.77,48.20 L45.80,48.26 L47.25,48.59 L48.57,49.22 L49.99,50.36 L64.81,64.54 L65.07,64.67 L65.76,64.28 L66.75,63.25 L67.28,62.09 L67.39,60.62 L67.06,59.17 L66.26,57.98 L60.50,52.21 L57.95,44.93 L57.16,44.20 L56.03,43.80 L52.62,44.48 L52.52,41.13 L51.80,39.77 L51.07,39.24 L49.36,38.51 L48.33,38.56 Z" />
 
-    <!-- Separated white shoe sole -->
+    <!-- Separated shoe sole -->
     <path
         android:fillColor="#FFFFFF"
-        android:pathData="M42.2,53.4 L67.6,64.2 L66.1,66.2 C65.4,67.1 64.3,67.6 63.1,67.6 L56.8,67.6 C55.6,67.6 54.5,67.1 53.7,66.3 L42.5,55.6 C41.9,55.0 41.8,54.1 42.2,53.4 Z" />
+        android:pathData="M40.71,50.99 L41.14,52.26 L42.06,53.53 L53.82,64.12 L55.16,64.81 L56.37,65.07 L61.35,65.06 L47.25,51.59 L46.38,51.18 L45.38,50.97 Z" />
+
 </vector>
