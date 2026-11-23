@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="172dp"
+    android:height="172dp"
+    android:viewportWidth="172"
+    android:viewportHeight="172">
+
+    <!-- Dark gray circular track -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M86,16 A70,70 0 1,1 85.99,16"
+        android:strokeColor="#1C1C1E"
+        android:strokeWidth="12" />
+
+    <!-- White progress arc with rounded caps -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M86,16 A70,70 0 1,1 32.38,131.0"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round"
+        android:strokeWidth="12" />
+
+</vector>
