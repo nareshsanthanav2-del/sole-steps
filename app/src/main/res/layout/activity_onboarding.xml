@@ -1,105 +1,696 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootOnboarding"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/oled_black"
-    android:gravity="center_horizontal"
+    android:background="#000000"
     android:orientation="vertical"
-    android:padding="28dp">
+    android:paddingHorizontal="24dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="24dp">
 
-    <Space
+    <!-- Top Segmented Progress Bar (hidden on Step 1 Welcome) -->
+    <LinearLayout
+        android:id="@+id/llProgressSegments"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <ImageView
-        android:layout_width="112dp"
-        android:layout_height="112dp"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/ic_launcher_foreground" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:fontFamily="sans-serif-medium"
-        android:letterSpacing="-0.02"
-        android:text="sole"
-        android:textColor="@color/white"
-        android:textSize="36sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="Minimalist daily movement tracking."
-        android:textColor="@color/text_secondary"
-        android:textSize="15sp" />
+        android:layout_marginBottom="28dp"
+        android:orientation="horizontal"
+        android:visibility="gone">
 
+        <View
+            android:id="@+id/seg1"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1" />
+
+        <View
+            android:id="@+id/seg2"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginHorizontal="4dp"
+            android:layout_weight="1" />
+
+        <View
+            android:id="@+id/seg3"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginHorizontal="4dp"
+            android:layout_weight="1" />
+
+        <View
+            android:id="@+id/seg4"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginHorizontal="4dp"
+            android:layout_weight="1" />
+
+        <View
+            android:id="@+id/seg5"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginStart="4dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <!-- Main Step Container -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <!-- ==================== STEP 1: WELCOME ==================== -->
+        <LinearLayout
+            android:id="@+id/stepWelcome"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <ImageView
+                android:layout_width="124dp"
+                android:layout_height="124dp"
+                android:contentDescription="sole logo"
+                android:src="@drawable/ic_launcher_foreground" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:letterSpacing="-0.02"
+                android:text="sole"
+                android:textColor="#FFFFFF"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Minimalist step tracking."
+                android:textColor="#E5E5EA"
+                android:textSize="18sp" />
+
+            <!-- Local-first Privacy Card -->
+            <LinearLayout
+                android:id="@+id/cardPrivacy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="20dp">
+
+                <TextView
+                    android:id="@+id/tvPrivacyNote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:lineSpacingExtra="3dp"
+                    android:text="100% local-first. Your step data never leaves your phone."
+                    android:textColor="#8E8E93"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- Use AI Activity Logging Toggle Card -->
+            <LinearLayout
+                android:id="@+id/cardAiToggle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="18dp">
+
+                <FrameLayout
+                    android:id="@+id/boxAiCheckbox"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp">
+
+                    <TextView
+                        android:id="@+id/tvAiCheckmark"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="✓"
+                        android:textColor="#000000"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Use AI activity logging"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:lineSpacingExtra="2dp"
+                        android:text="Estimate steps when you forget your phone. Optional."
+                        android:textColor="#8E8E93"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ==================== STEP 2: DAILY GOAL ==================== -->
+        <LinearLayout
+            android:id="@+id/stepGoal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Daily step goal"
+                android:textColor="#FFFFFF"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:lineSpacingExtra="3dp"
+                android:text="Pick a target that feels realistic. You can change it anytime."
+                android:textColor="#8E8E93"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvGoalNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:letterSpacing="-0.02"
+                    android:text="10,000"
+                    android:textColor="#FFFFFF"
+                    android:textSize="62sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="steps a day"
+                    android:textColor="#8E8E93"
+                    android:textSize="15sp" />
+
+                <!-- Preset Pills Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/btnPreset6k"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:layout_marginEnd="6dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="6,000"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/btnPreset8k"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:layout_marginHorizontal="6dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="8,000"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/btnPreset10k"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:layout_marginHorizontal="6dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="10,000"
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/btnPreset12k"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="12,000"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Custom Number Outlined Pill -->
+                <TextView
+                    android:id="@+id/btnCustomGoal"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:text="Custom number"
+                    android:textColor="#8E8E93"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ==================== STEP 3: ABOUT YOU ==================== -->
+        <LinearLayout
+            android:id="@+id/stepAbout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="About you"
+                android:textColor="#FFFFFF"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Optional. Used to estimate distance and calories."
+                android:textColor="#8E8E93"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="First name"
+                android:textColor="#8E8E93"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/etFirstName"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="8dp"
+                android:hint="Name or initial"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName|textCapWords"
+                android:paddingHorizontal="16dp"
+                android:singleLine="true"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#636366"
+                android:textSize="15sp" />
+
+            <!-- Height & Weight Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <!-- Height -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Height"
+                        android:textColor="#8E8E93"
+                        android:textSize="13sp" />
+
+                    <LinearLayout
+                        android:id="@+id/boxHeight"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="16dp">
+
+                        <EditText
+                            android:id="@+id/etHeight"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:hint="170"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLength="3"
+                            android:singleLine="true"
+                            android:textColor="#FFFFFF"
+                            android:textColorHint="#636366"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="cm"
+                            android:textColor="#8E8E93"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Weight -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Weight"
+                        android:textColor="#8E8E93"
+                        android:textSize="13sp" />
+
+                    <LinearLayout
+                        android:id="@+id/boxWeight"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="16dp">
+
+                        <EditText
+                            android:id="@+id/etWeight"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:hint="70"
+                            android:imeOptions="actionDone"
+                            android:inputType="number"
+                            android:maxLength="3"
+                            android:singleLine="true"
+                            android:textColor="#FFFFFF"
+                            android:textColorHint="#636366"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="kg"
+                            android:textColor="#8E8E93"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Without these, Sole uses average values."
+                android:textColor="#8E8E93"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/btnUseDefaults"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="14dp"
+                android:gravity="center"
+                android:text="Use defaults"
+                android:textColor="#8E8E93"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- ==================== STEP 4: COUNT YOUR STEPS ==================== -->
+        <LinearLayout
+            android:id="@+id/stepPermission"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Count your steps"
+                android:textColor="#FFFFFF"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:lineSpacingExtra="3dp"
+                android:text="Sole reads your phone’s built-in step sensor, so it counts automatically with almost no battery use."
+                android:textColor="#8E8E93"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="172dp"
+                    android:layout_height="172dp"
+                    android:contentDescription="Step counter ring"
+                    android:src="@drawable/bg_onboarding_ring" />
+
+                <LinearLayout
+                    android:id="@+id/cardPermissionNote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="24dp"
+                    android:paddingVertical="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:lineSpacingExtra="3dp"
+                        android:text="Android will ask for Physical Activity access. Tap Allow to start counting."
+                        android:textColor="#8E8E93"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ==================== STEP 5: CONNECT AI ==================== -->
+        <LinearLayout
+            android:id="@+id/stepAiKey"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Connect AI"
+                android:textColor="#FFFFFF"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:lineSpacingExtra="3dp"
+                android:text="Add a free API key to log activities like “evening walk, 30 min” as steps."
+                android:textColor="#8E8E93"
+                android:textSize="14sp" />
+
+            <!-- Get a free key card -->
+            <LinearLayout
+                android:id="@+id/cardGetFreeKey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="18dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Get a free key"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="console.groq.com/keys"
+                        android:textColor="#8E8E93"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="↗"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="API key"
+                android:textColor="#8E8E93"
+                android:textSize="13sp" />
+
+            <!-- API Key Input Box with Green Checkmark -->
+            <LinearLayout
+                android:id="@+id/boxApiKey"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp">
+
+                <EditText
+                    android:id="@+id/etApiKey"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="gsk_..."
+                    android:imeOptions="actionDone"
+                    android:inputType="textNoSuggestions|textVisiblePassword"
+                    android:singleLine="true"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#636366"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tvKeyCheckIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="8dp"
+                    android:gravity="center"
+                    android:text="✓"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvKeyStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Key verified"
+                android:textColor="#22C55E"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:lineSpacingExtra="3dp"
+                android:text="Your key stays on this phone. Only the activity text you type is sent to Groq."
+                android:textColor="#8E8E93"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <!-- Bottom Pinned Primary Pill Button + Secondary Link -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Your name"
-            android:textColor="@color/text_secondary"
-            android:textSize="13sp" />
-
-        <EditText
-            android:id="@+id/etOnboardName"
+            android:id="@+id/btnPrimary"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_input_subtle"
-            android:hint="Noah"
-            android:inputType="textPersonName|textCapWords"
-            android:paddingHorizontal="16dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/text_muted"
-            android:textSize="16sp" />
+            android:layout_height="56dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="Get Started"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/btnSecondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Daily step goal"
-            android:textColor="@color/text_secondary"
-            android:textSize="13sp" />
-
-        <EditText
-            android:id="@+id/etOnboardGoal"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_input_subtle"
-            android:hint="10000"
-            android:inputType="number"
+            android:layout_marginTop="14dp"
+            android:clickable="true"
+            android:focusable="true"
             android:paddingHorizontal="16dp"
-            android:text="10000"
-            android:textColor="@color/white"
-            android:textColorHint="@color/text_muted"
-            android:textSize="16sp" />
+            android:paddingVertical="4dp"
+            android:text="Skip"
+            android:textColor="#8E8E93"
+            android:textSize="14sp"
+            android:visibility="gone" />
     </LinearLayout>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.2" />
-
-    <TextView
-        android:id="@+id/btnGetStarted"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="@drawable/bg_white_pill"
-        android:fontFamily="sans-serif-medium"
-        android:gravity="center"
-        android:text="Get started"
-        android:textColor="@color/oled_black"
-        android:textSize="16sp" />
 
 </LinearLayout>
