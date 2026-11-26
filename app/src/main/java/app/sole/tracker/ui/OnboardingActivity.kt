@@ -30,7 +30,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
-import app.sole.tracker.MainActivity
 import app.sole.tracker.R
 import app.sole.tracker.data.PrefsManager
 import java.net.HttpURLConnection
@@ -160,7 +159,6 @@ class OnboardingActivity : AppCompatActivity() {
     }
 
     private fun applyInitialStyles() {
-        // Bold "100% local-first." in white inside privacy card
         val tvPrivacy = findViewById<TextView>(R.id.tvPrivacyNote)
         val fullPrivacy = "100% local-first. Your step data never leaves your phone."
         val span = SpannableString(fullPrivacy)
@@ -169,23 +167,18 @@ class OnboardingActivity : AppCompatActivity() {
         span.setSpan(ForegroundColorSpan(Color.WHITE), 0, boldLen, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         tvPrivacy.text = span
 
-        // Dark rounded cards
-        val cardBg = makeRoundedDrawable("#111113", 16f, "#222225", 1f)
         findViewById<View>(R.id.cardPrivacy).background = makeRoundedDrawable("#111113", 16f, "#222225", 1f)
         findViewById<View>(R.id.cardAiToggle).background = makeRoundedDrawable("#111113", 16f, "#222225", 1f)
         findViewById<View>(R.id.cardPermissionNote).background = makeRoundedDrawable("#111113", 16f, "#222225", 1f)
-        findViewById<View>(R.id.cardGetFreeKey).background = cardBg
+        findViewById<View>(R.id.cardGetFreeKey).background = makeRoundedDrawable("#111113", 16f, "#222225", 1f)
 
-        // Primary white pill button
         btnPrimary.background = makeRoundedDrawable("#FFFFFF", 28f)
 
-        // About You inputs
         etFirstName.background = makeRoundedDrawable("#141416", 14f, "#FFFFFF", 1.5f)
         boxHeight.background = makeRoundedDrawable("#161618", 14f)
         boxWeight.background = makeRoundedDrawable("#161618", 14f)
         findViewById<View>(R.id.btnUseDefaults).background = makeRoundedDrawable("#000000", 24f, "#2C2C2E", 1f)
 
-        // API key input & green check badge
         boxApiKey.background = makeRoundedDrawable("#141416", 14f, "#2C2C2E", 1f)
         tvKeyCheckIcon.background = makeRoundedDrawable("#22C55E", 12f)
 
@@ -194,27 +187,23 @@ class OnboardingActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
-        // Step 1: Toggle AI activity logging
         findViewById<View>(R.id.cardAiToggle).setOnClickListener {
             aiLoggingEnabled = !aiLoggingEnabled
             updateAiCheckboxUI()
         }
 
-        // Step 2: Goal presets & Custom number
         btnPreset6k.setOnClickListener { selectedGoal = 6000; updateGoalUI() }
         btnPreset8k.setOnClickListener { selectedGoal = 8000; updateGoalUI() }
         btnPreset10k.setOnClickListener { selectedGoal = 10000; updateGoalUI() }
         btnPreset12k.setOnClickListener { selectedGoal = 12000; updateGoalUI() }
         btnCustomGoal.setOnClickListener { showCustomGoalDialog() }
 
-        // Step 3: Use defaults button
         findViewById<View>(R.id.btnUseDefaults).setOnClickListener {
             etHeight.setText("170")
             etWeight.setText("70")
             showStep(3)
         }
 
-        // Step 5: Open console.groq.com/keys
         findViewById<View>(R.id.cardGetFreeKey).setOnClickListener {
             try {
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://console.groq.com/keys")))
@@ -223,7 +212,6 @@ class OnboardingActivity : AppCompatActivity() {
             }
         }
 
-        // Step 5: Live API key verification UI
         etApiKey.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -233,7 +221,6 @@ class OnboardingActivity : AppCompatActivity() {
             }
         })
 
-        // Primary CTA button
         btnPrimary.setOnClickListener {
             when (currentStep) {
                 0 -> showStep(1)
@@ -244,7 +231,6 @@ class OnboardingActivity : AppCompatActivity() {
             }
         }
 
-        // Secondary link ("Skip" / "Skip for now")
         btnSecondary.setOnClickListener {
             when (currentStep) {
                 2 -> {
@@ -267,7 +253,6 @@ class OnboardingActivity : AppCompatActivity() {
         stepPermission.visibility = if (step == 3) View.VISIBLE else View.GONE
         stepAiKey.visibility = if (step == 4) View.VISIBLE else View.GONE
 
-        // Segmented progress bar: hidden on step 0, visible on steps 1..4
         if (step == 0) {
             llProgressSegments.visibility = View.GONE
         } else {
@@ -285,7 +270,6 @@ class OnboardingActivity : AppCompatActivity() {
             }
         }
 
-        // Configure primary & secondary buttons per screen
         when (step) {
             0 -> {
                 btnPrimary.text = "Get Started"
@@ -419,7 +403,6 @@ class OnboardingActivity : AppCompatActivity() {
             return
         }
 
-        // Show verified visual state immediately, then confirm against Groq in background
         boxApiKey.background = makeRoundedDrawable("#141416", 14f, "#FFFFFF", 1.5f)
         tvKeyCheckIcon.background = makeRoundedDrawable("#22C55E", 12f)
         tvKeyCheckIcon.visibility = View.VISIBLE
@@ -448,7 +431,7 @@ class OnboardingActivity : AppCompatActivity() {
                         }
                     }
                 } catch (_: Exception) {
-                    // Offline or network timeout: keep format-verified state
+                    // Offline or timeout: keep format-verified state
                 }
             }
         }
@@ -465,27 +448,24 @@ class OnboardingActivity : AppCompatActivity() {
         val h = etHeight.text.toString().trim().toIntOrNull()
         val w = etWeight.text.toString().trim().toIntOrNull()
         if (h != null && h in 80..260 && w != null && w in 25..350) {
-            prefs.heightCm = h
-            prefs.weightKg = w
+            prefs.heightCm = h.toFloat()
+            prefs.weightKg = w.toFloat()
             prefs.useBodyMetrics = true
         } else {
-            prefs.heightCm = 170
-            prefs.weightKg = 70
+            prefs.heightCm = 170f
+            prefs.weightKg = 70f
             prefs.useBodyMetrics = false
         }
 
         val enteredKey = if (saveApiKey) etApiKey.text.toString().trim() else ""
+        prefs.aiEnabled = aiLoggingEnabled
         if (aiLoggingEnabled && enteredKey.isNotEmpty()) {
-            prefs.aiLoggingEnabled = true
             prefs.googleApiKey = enteredKey
-        } else {
-            prefs.aiLoggingEnabled = aiLoggingEnabled
-            if (!saveApiKey) {
-                prefs.googleApiKey = ""
-            }
+        } else if (!saveApiKey) {
+            prefs.googleApiKey = ""
         }
 
-        prefs.isOnboardingComplete = true
+        prefs.isOnboarded = true
 
         startActivity(Intent(this, MainActivity::class.java))
         finish()
